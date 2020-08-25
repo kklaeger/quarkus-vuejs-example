@@ -1,0 +1,18 @@
+jobs:
+  include:
+    - stage: quarkus-backend
+      language: java
+      jdk: 
+        - oraclejdk11
+      branches:
+        only:
+          - master
+      cache:
+        directories:
+          - $HOME/.m2
+          - $HOME/.gradle
+      before_script: 
+        - cd quarkus-backend
+      script: 
+        - gradle clean build  
+          
