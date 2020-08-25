@@ -14,5 +14,5 @@ jobs:
       before_script: 
         - cd quarkus-backend
       script: 
-        - gradle clean build  
+        - ./gradlew clean build  
           
