@@ -1,0 +1,7 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`UserList component should render successfully. 1`] = `
+<div>
+  <h1>User List</h1>
+</div>
+`;
