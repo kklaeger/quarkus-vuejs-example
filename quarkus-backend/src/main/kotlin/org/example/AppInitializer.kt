@@ -9,6 +9,9 @@ import org.example.database.UserRepository
 import org.example.database.entity.UserEntity
 import org.jboss.logging.Logger
 
+/**
+ * Initializes the application by adding sample users to the database.
+ */
 @ApplicationScoped
 class AppInitializer(private val userRepository: UserRepository) {
     @Transactional

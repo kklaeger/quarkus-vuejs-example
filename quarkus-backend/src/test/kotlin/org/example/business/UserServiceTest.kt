@@ -58,4 +58,20 @@ class UserServiceTest {
             verify { userMapper.mapUserBoToUserResponseDto(any()) wasNot Called }
         }
     }
+
+    @Nested
+    inner class SaveUser {
+        @Test
+        fun `save a new user`() {
+            every { userDataStore.persistUser(any()) } returns sampleUserBo
+            every { userMapper.mapUserBoToUserResponseDto(sampleUserBo) } returns sampleUserResponseDto
+
+            val result = cut.saveUser(sampleUserBo)
+
+            assertThat(result).isEqualTo(sampleUserResponseDto)
+
+            verify { userDataStore.persistUser(any()) }
+            verify { userMapper.mapUserBoToUserResponseDto(sampleUserBo) }
+        }
+    }
 }

@@ -1,6 +1,7 @@
 package org.example.business.mapper
 
 import org.assertj.core.api.Assertions.assertThat
+import org.example.api.dto.UserRequestDto
 import org.example.api.dto.UserResponseDto
 import org.example.business.bo.UserBo
 import org.example.database.entity.UserEntity
@@ -20,20 +21,35 @@ class UserMapperTest {
         id = "1",
         name = "Test"
     )
+    private val sampleUserRequestDto = UserRequestDto(
+        name = "Test"
+    )
     private val sampleUserResponseDto = UserResponseDto(
         id = "1",
         name = "Test"
     )
 
     @Test
-    fun `maps an userEntity to an userBo`() {
+    fun `maps a userEntity to a userBo`() {
         val result = cut.mapUserEntityToUserBo(sampleUserEntity)
         assertThat(result).isEqualTo(sampleUserBo)
     }
 
     @Test
-    fun `maps an userBo to an userResponseDto`() {
+    fun `maps a userBo to a userEntity`() {
+        val result = cut.mapUserBoToUserEntity(sampleUserBo)
+        assertThat(result).isEqualTo(sampleUserEntity)
+    }
+
+    @Test
+    fun `maps a userBo to a userResponseDto`() {
         val result = cut.mapUserBoToUserResponseDto(sampleUserBo)
         assertThat(result).isEqualTo(sampleUserResponseDto)
+    }
+
+    @Test
+    fun `maps a userRequestDto to a userBo`() {
+        val result = cut.mapUserRequestDtoToUserBo(sampleUserRequestDto)
+        assertThat(result.name).isEqualTo(sampleUserBo.name)
     }
 }
