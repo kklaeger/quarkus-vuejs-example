@@ -1,0 +1,15 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`UserListElement component should render successfully. 1`] = `
+<div class="columns is-mobile">
+  <div class="column is-3-mobile is-2-tablet is-1-desktop is-2-widescreen">
+    <b-icon-stub pack="fas" icon="user" size="is-medium"></b-icon-stub>
+  </div>
+  <div class="column name-column">Test</div>
+  <div class="column is-3-mobile is-2-tablet is-1-desktop is-2-widescreen">
+    <b-button-stub type="is-text" rounded="true" nativetype="button" tag="button">
+      <b-icon-stub pack="fas" icon="trash" size="is-medium"></b-icon-stub>
+    </b-button-stub>
+  </div>
+</div>
+`;

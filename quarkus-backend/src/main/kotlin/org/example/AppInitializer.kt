@@ -17,8 +17,10 @@ class AppInitializer(private val userRepository: UserRepository) {
     @Transactional
     fun init(@Observes ev: StartupEvent?) {
         LOGGER.info("Creating dummy data...")
-        userRepository.persist(UserEntity("1", "Dummy 1"))
-        userRepository.persist(UserEntity("2", "Dummy 2"))
+        userRepository.persist(UserEntity("1", "John Doe"))
+        userRepository.persist(UserEntity("2", "Peter Miller"))
+        userRepository.persist(UserEntity("3", "Jenny Jackson"))
+        userRepository.persist(UserEntity("4", "Alice Johnson"))
     }
 
     fun cleanUp(@Observes ev: ShutdownEvent?) {

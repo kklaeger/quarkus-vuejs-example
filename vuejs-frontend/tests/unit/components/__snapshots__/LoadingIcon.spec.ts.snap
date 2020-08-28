@@ -1,0 +1,3 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`LoadingIcon component should render successfully. 1`] = `<b-loading-stub active="true" animation="fade" oncancel="function _default() {}"></b-loading-stub>`;
