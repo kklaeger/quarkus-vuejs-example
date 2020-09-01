@@ -1,0 +1,32 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`MainPage component should render and match snapshot given isError=false and isLoading=false. 1`] = `
+<section class="section">
+  <!---->
+  <!---->
+  <div class="container user-list">
+    <adduser-stub class="addUser"></adduser-stub>
+    <userlist-stub users="[object Object]"></userlist-stub>
+  </div>
+</section>
+`;
+
+exports[`MainPage component should render and match snapshot given isError=true. 1`] = `
+<section class="section">
+  <!---->
+  <div class="error">
+    Unable to load users: test
+  </div>
+  <!---->
+</section>
+`;
+
+exports[`MainPage component should render and match snapshot given isLoading=true. 1`] = `
+<section class="section">
+  <div class="loading">
+    <loadingicon-stub></loadingicon-stub>
+  </div>
+  <!---->
+  <!---->
+</section>
+`;

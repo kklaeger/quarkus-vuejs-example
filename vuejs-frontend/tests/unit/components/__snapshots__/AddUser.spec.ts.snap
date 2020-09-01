@@ -1,0 +1,9 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`AddUser component should open and close modal. 1`] = `
+<div><button class="button is-primary">
+    Add User
+  </button>
+  <!---->
+</div>
+`;

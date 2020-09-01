@@ -1,62 +1,30 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[`UserList component should render and match snapshot given isError=true. 1`] = `
-<section class="section">
-  <!---->
-  <div class="error">
-    Unable to load users: test
-  </div>
-  <!---->
-</section>
-`;
-
-exports[`UserList component should render and match snapshot given isLoading=true. 1`] = `
-<section class="section">
-  <div class="loading">
-    <loadingicon-stub></loadingicon-stub>
-  </div>
-  <!---->
-  <!---->
-</section>
-`;
-
 exports[`UserList component should render the user list for empty user list and match snapshot. 1`] = `
-<section class="section">
-  <!---->
-  <!---->
-  <div class="container user-list">
-    <div>
-      No users available :)
-    </div>
+<div>
+  <div>
+    No users available :)
   </div>
-</section>
+</div>
 `;
 
 exports[`UserList component should render the user list for one user and match snapshot. 1`] = `
-<section class="section">
-  <!---->
-  <!---->
-  <div class="container user-list">
-    <div>
-      <ul>
-        <userlistelement-stub user="[object Object]"></userlistelement-stub>
-      </ul>
-    </div>
+<div>
+  <div>
+    <ul>
+      <userlistelement-stub user="[object Object]"></userlistelement-stub>
+    </ul>
   </div>
-</section>
+</div>
 `;
 
 exports[`UserList component should render the user list for two users and match snapshot. 1`] = `
-<section class="section">
-  <!---->
-  <!---->
-  <div class="container user-list">
-    <div>
-      <ul>
-        <userlistelement-stub user="[object Object]"></userlistelement-stub>
-        <userlistelement-stub user="[object Object]"></userlistelement-stub>
-      </ul>
-    </div>
+<div>
+  <div>
+    <ul>
+      <userlistelement-stub user="[object Object]"></userlistelement-stub>
+      <userlistelement-stub user="[object Object]"></userlistelement-stub>
+    </ul>
   </div>
-</section>
+</div>
 `;

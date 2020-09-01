@@ -1,20 +1,20 @@
 <template>
   <div id="app">
     <div class="container is-desktop">
-      <Header></Header>
-      <UserList></UserList>
+      <Header />
+      <MainPage />
     </div>
   </div>
 </template>
 
 <script lang="ts">
 import { Component, Vue } from "vue-property-decorator";
-import UserList from "./components/UserList.vue";
+import MainPage from "./components/MainPage.vue";
 import Header from "./components/Header.vue";
 
 @Component({
   components: {
-    UserList,
+    MainPage,
     Header
   }
 })

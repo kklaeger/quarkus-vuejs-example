@@ -7,6 +7,10 @@ const localVue = createLocalVue();
 localVue.use(Buefy);
 
 describe(UserListElement.name + " component", () => {
+  afterEach(() => {
+    jest.clearAllMocks();
+  });
+
   it("should render successfully.", () => {
     const user: User = { id: 1, name: "Test" };
 

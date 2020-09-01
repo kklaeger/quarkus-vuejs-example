@@ -1,0 +1,145 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`AddUserModal component should display error message if addUserHasError=true. 1`] = `
+<form class="cardwidth">
+  <div class="modal-card" style="width: auto;">
+    <header class="modal-card-head">
+      <p class="modal-card-title">Add User</p>
+    </header>
+    <section class="modal-card-body">
+      <div class="field"><label class="label">Name</label>
+        <div class="control is-clearfix"><input type="text" autocomplete="on" placeholder="Name" required="required" class="input">
+          <!---->
+          <!---->
+          <!---->
+        </div>
+        <!---->
+      </div>
+      <!---->
+      <div class="error">
+        Unable to add user: error
+      </div>
+    </section>
+    <footer class="modal-card-foot"><button type="button" class="button">
+        Close
+      </button> <button type="submit" class="button is-primary">
+        Save
+      </button></footer>
+  </div>
+</form>
+`;
+
+exports[`AddUserModal component should display loading icon if addUserIsLoading=true. 1`] = `
+<form class="cardwidth">
+  <div class="modal-card" style="width: auto;">
+    <header class="modal-card-head">
+      <p class="modal-card-title">Add User</p>
+    </header>
+    <section class="modal-card-body">
+      <div class="field"><label class="label">Name</label>
+        <div class="control is-clearfix"><input type="text" autocomplete="on" placeholder="Name" required="required" class="input">
+          <!---->
+          <!---->
+          <!---->
+        </div>
+        <!---->
+      </div>
+      <div class="loading">
+        <transition-stub name="fade">
+          <div class="loading-overlay is-active">
+            <div class="loading-background"></div>
+            <div class="loading-icon"></div>
+          </div>
+        </transition-stub>
+      </div>
+      <!---->
+    </section>
+    <footer class="modal-card-foot"><button type="button" class="button">
+        Close
+      </button> <button type="submit" class="button is-primary">
+        Save
+      </button></footer>
+  </div>
+</form>
+`;
+
+exports[`AddUserModal component should trigger emit('close') by clicking close button. 1`] = `
+<form class="cardwidth">
+  <div class="modal-card" style="width: auto;">
+    <header class="modal-card-head">
+      <p class="modal-card-title">Add User</p>
+    </header>
+    <section class="modal-card-body">
+      <div class="field"><label class="label">Name</label>
+        <div class="control is-clearfix"><input type="text" autocomplete="on" placeholder="Name" required="required" class="input">
+          <!---->
+          <!---->
+          <!---->
+        </div>
+        <!---->
+      </div>
+      <!---->
+      <!---->
+    </section>
+    <footer class="modal-card-foot"><button type="button" class="button">
+        Close
+      </button> <button type="submit" class="button is-primary">
+        Save
+      </button></footer>
+  </div>
+</form>
+`;
+
+exports[`AddUserModal component should update input, click save button and NOT trigger emit('close'). 1`] = `
+<form class="cardwidth">
+  <div class="modal-card" style="width: auto;">
+    <header class="modal-card-head">
+      <p class="modal-card-title">Add User</p>
+    </header>
+    <section class="modal-card-body">
+      <div class="field"><label class="label">Name</label>
+        <div class="control is-clearfix"><input type="text" autocomplete="on" placeholder="Name" required="required" class="input">
+          <!---->
+          <!---->
+          <!---->
+        </div>
+        <!---->
+      </div>
+      <!---->
+      <!---->
+    </section>
+    <footer class="modal-card-foot"><button type="button" class="button">
+        Close
+      </button> <button type="submit" class="button is-primary">
+        Save
+      </button></footer>
+  </div>
+</form>
+`;
+
+exports[`AddUserModal component should update input, click save button and trigger emit('close'). 1`] = `
+<form class="cardwidth">
+  <div class="modal-card" style="width: auto;">
+    <header class="modal-card-head">
+      <p class="modal-card-title">Add User</p>
+    </header>
+    <section class="modal-card-body">
+      <div class="field"><label class="label">Name</label>
+        <div class="control is-clearfix"><input type="text" autocomplete="on" placeholder="Name" required="required" class="input">
+          <!---->
+          <!---->
+          <!---->
+        </div>
+        <!---->
+      </div>
+      <!---->
+      <!---->
+    </section>
+    <footer class="modal-card-foot"><button type="button" class="button">
+        Close
+      </button> <button type="submit" class="button is-primary">
+        Save
+      </button></footer>
+  </div>
+</form>
+`;
