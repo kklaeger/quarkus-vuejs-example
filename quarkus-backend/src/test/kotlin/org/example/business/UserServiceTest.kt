@@ -7,9 +7,11 @@ import io.mockk.verify
 import org.assertj.core.api.Assertions.assertThat
 import org.example.api.dto.UserResponseDto
 import org.example.business.bo.UserBo
+import org.example.business.exceptions.UserNotFoundException
 import org.example.business.mapper.UserMapper
 import org.example.database.UserDataStore
 import org.example.utils.annotations.UnitTest
+import org.junit.jupiter.api.Assertions
 import org.junit.jupiter.api.Nested
 import org.junit.jupiter.api.Test
 
@@ -72,6 +74,34 @@ class UserServiceTest {
 
             verify { userDataStore.persistUser(any()) }
             verify { userMapper.mapUserBoToUserResponseDto(sampleUserBo) }
+        }
+    }
+
+    @Nested
+    inner class DeleteUser {
+        @Test
+        fun `delete a user`() {
+            every { userDataStore.deleteUser("1") } returns sampleUserBo
+            every { userMapper.mapUserBoToUserResponseDto(sampleUserBo) } returns sampleUserResponseDto
+
+            val result = cut.deleteUser("1")
+
+            assertThat(result).isEqualTo(sampleUserResponseDto)
+
+            verify { userDataStore.deleteUser("1") }
+            verify { userMapper.mapUserBoToUserResponseDto(sampleUserBo) }
+        }
+
+        @Test
+        fun `delete a user fails`() {
+            every { userDataStore.deleteUser("1") } throws UserNotFoundException("1")
+
+            Assertions.assertThrows(UserNotFoundException::class.java) {
+                cut.deleteUser("1")
+            }
+
+            verify { userDataStore.deleteUser("1") }
+            verify(exactly = 0) { userMapper.mapUserBoToUserResponseDto(any()) }
         }
     }
 }

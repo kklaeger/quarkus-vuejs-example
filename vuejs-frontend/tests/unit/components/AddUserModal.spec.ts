@@ -20,7 +20,9 @@ describe(AddUserModal.name + " component", () => {
       fetchUsersIsLoading: false,
       fetchUsersHasError: false,
       addUserIsLoading: false,
-      addUserHasError: false
+      addUserHasError: false,
+      deleteUserIsLoading: false,
+      deleteUserHasError: false
     };
     const actions = {
       addUser: jest.fn()
@@ -51,7 +53,9 @@ describe(AddUserModal.name + " component", () => {
       fetchUsersIsLoading: false,
       fetchUsersHasError: false,
       addUserIsLoading: false,
-      addUserHasError: false
+      addUserHasError: false,
+      deleteUserIsLoading: false,
+      deleteUserHasError: false
     };
     const actions = {
       addUser: jest.fn()
@@ -88,7 +92,9 @@ describe(AddUserModal.name + " component", () => {
       fetchUsersIsLoading: false,
       fetchUsersHasError: false,
       addUserIsLoading: false,
-      addUserHasError: false
+      addUserHasError: false,
+      deleteUserIsLoading: false,
+      deleteUserHasError: false
     };
     const actions = {
       addUser: jest.fn()
@@ -123,7 +129,9 @@ describe(AddUserModal.name + " component", () => {
       fetchUsersIsLoading: false,
       fetchUsersHasError: false,
       addUserIsLoading: true,
-      addUserHasError: false
+      addUserHasError: false,
+      deleteUserIsLoading: false,
+      deleteUserHasError: false
     };
     const actions = {
       addUser: jest.fn()
@@ -151,6 +159,8 @@ describe(AddUserModal.name + " component", () => {
       fetchUsersHasError: false,
       addUserIsLoading: false,
       addUserHasError: true,
+      deleteUserIsLoading: false,
+      deleteUserHasError: false,
       addUserErrorMsg: "error"
     };
     const actions = {

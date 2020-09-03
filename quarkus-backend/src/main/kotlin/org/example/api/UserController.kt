@@ -3,6 +3,7 @@ package org.example.api
 import javax.transaction.Transactional
 import javax.validation.Valid
 import javax.ws.rs.Consumes
+import javax.ws.rs.DELETE
 import javax.ws.rs.GET
 import javax.ws.rs.POST
 import javax.ws.rs.Path
@@ -13,6 +14,7 @@ import org.example.api.dto.UserRequestDto
 import org.example.api.dto.UserResponseDto
 import org.example.business.UserService
 import org.example.business.mapper.UserMapper
+import org.jboss.resteasy.annotations.jaxrs.PathParam
 
 /**
  * REST Controller to handle requests regarding the users.
@@ -34,5 +36,14 @@ class UserController(
     fun saveUser(@Valid userRequestDto: UserRequestDto): Response {
         val response = userService.saveUser(userMapper.mapUserRequestDtoToUserBo(userRequestDto))
         return Response.ok(response).status(201).build()
+    }
+
+    @DELETE
+    @Path("/{id}")
+    @Produces(MediaType.APPLICATION_JSON)
+    @Transactional
+    fun deleteUser(@PathParam id: String): Response {
+        val response = userService.deleteUser(id)
+        return Response.ok(response).status(200).build()
     }
 }

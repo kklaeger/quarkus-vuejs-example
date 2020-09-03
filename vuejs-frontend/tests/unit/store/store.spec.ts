@@ -1,4 +1,10 @@
-import { mutations, fetchUsers, addUser, State } from "@/store/store";
+import {
+  mutations,
+  fetchUsers,
+  addUser,
+  deleteUser,
+  State
+} from "@/store/store";
 import { User } from "@/models/User";
 import { ActionContext } from "vuex";
 import http from "../../../src/utils/Api";
@@ -11,7 +17,10 @@ const {
   FETCH_ERROR,
   ADD_INIT,
   ADD_SUCCESS,
-  ADD_ERROR
+  ADD_ERROR,
+  DELETE_INIT,
+  DELETE_SUCCESS,
+  DELETE_ERROR
 } = mutations;
 
 describe("Store", () => {
@@ -26,7 +35,10 @@ describe("Store", () => {
         fetchUsersIsLoading: false,
         fetchUsersHasError: false,
         addUserIsLoading: false,
-        addUserHasError: false
+        addUserHasError: false,
+        deleteUserIsLoading: [],
+        deleteUserHasError: [],
+        deleteUserErrorMsg: {}
       };
 
       FETCH_INIT(state);
@@ -36,7 +48,10 @@ describe("Store", () => {
         fetchUsersIsLoading: true,
         fetchUsersHasError: false,
         addUserIsLoading: false,
-        addUserHasError: false
+        addUserHasError: false,
+        deleteUserIsLoading: [],
+        deleteUserHasError: [],
+        deleteUserErrorMsg: {}
       });
     });
 
@@ -46,7 +61,10 @@ describe("Store", () => {
         fetchUsersIsLoading: false,
         fetchUsersHasError: true,
         addUserIsLoading: false,
-        addUserHasError: false
+        addUserHasError: false,
+        deleteUserIsLoading: [],
+        deleteUserHasError: [],
+        deleteUserErrorMsg: {}
       };
 
       FETCH_INIT(state);
@@ -56,7 +74,10 @@ describe("Store", () => {
         fetchUsersIsLoading: true,
         fetchUsersHasError: false,
         addUserIsLoading: false,
-        addUserHasError: false
+        addUserHasError: false,
+        deleteUserIsLoading: [],
+        deleteUserHasError: [],
+        deleteUserErrorMsg: {}
       });
     });
 
@@ -66,9 +87,12 @@ describe("Store", () => {
         fetchUsersIsLoading: true,
         fetchUsersHasError: false,
         addUserIsLoading: false,
-        addUserHasError: false
+        addUserHasError: false,
+        deleteUserIsLoading: [],
+        deleteUserHasError: [],
+        deleteUserErrorMsg: {}
       };
-      const payload: User[] = [{ id: 1, name: "Test" }];
+      const payload: User[] = [{ id: "1", name: "Test" }];
 
       FETCH_SUCCESS(state, payload);
 
@@ -77,7 +101,10 @@ describe("Store", () => {
         fetchUsersIsLoading: false,
         fetchUsersHasError: false,
         addUserIsLoading: false,
-        addUserHasError: false
+        addUserHasError: false,
+        deleteUserIsLoading: [],
+        deleteUserHasError: [],
+        deleteUserErrorMsg: {}
       });
     });
     it("should call FETCH_ERROR and change to fetchUsersIsLoading=false and fetchUsersHasError=true and error message, given fetchUsersIsLoading=true and fetchUsersHasError=false.", () => {
@@ -86,7 +113,10 @@ describe("Store", () => {
         fetchUsersIsLoading: true,
         fetchUsersHasError: false,
         addUserIsLoading: false,
-        addUserHasError: false
+        addUserHasError: false,
+        deleteUserIsLoading: [],
+        deleteUserHasError: [],
+        deleteUserErrorMsg: {}
       };
       const payload = "error";
 
@@ -98,7 +128,10 @@ describe("Store", () => {
         fetchUsersIsLoading: false,
         fetchUsersHasError: true,
         addUserIsLoading: false,
-        addUserHasError: false
+        addUserHasError: false,
+        deleteUserIsLoading: [],
+        deleteUserHasError: [],
+        deleteUserErrorMsg: {}
       });
     });
 
@@ -108,7 +141,10 @@ describe("Store", () => {
         fetchUsersIsLoading: false,
         fetchUsersHasError: false,
         addUserIsLoading: false,
-        addUserHasError: false
+        addUserHasError: false,
+        deleteUserIsLoading: [],
+        deleteUserHasError: [],
+        deleteUserErrorMsg: {}
       };
 
       ADD_INIT(state);
@@ -118,7 +154,10 @@ describe("Store", () => {
         fetchUsersIsLoading: false,
         fetchUsersHasError: false,
         addUserIsLoading: true,
-        addUserHasError: false
+        addUserHasError: false,
+        deleteUserIsLoading: [],
+        deleteUserHasError: [],
+        deleteUserErrorMsg: {}
       });
     });
 
@@ -128,7 +167,10 @@ describe("Store", () => {
         fetchUsersIsLoading: false,
         fetchUsersHasError: false,
         addUserIsLoading: false,
-        addUserHasError: true
+        addUserHasError: true,
+        deleteUserIsLoading: [],
+        deleteUserHasError: [],
+        deleteUserErrorMsg: {}
       };
 
       ADD_INIT(state);
@@ -138,31 +180,40 @@ describe("Store", () => {
         fetchUsersIsLoading: false,
         fetchUsersHasError: false,
         addUserIsLoading: true,
-        addUserHasError: false
+        addUserHasError: false,
+        deleteUserIsLoading: [],
+        deleteUserHasError: [],
+        deleteUserErrorMsg: {}
       });
     });
 
     it("should call ADD_SUCCESS and change to addUserIsLoading=false and addUserHasError=false and user list, given addUserIsLoading=true and addUserHasError=false.", () => {
       const state: State = {
-        users: [{ id: 1, name: "Test1" }],
+        users: [{ id: "1", name: "Test1" }],
         fetchUsersIsLoading: false,
         fetchUsersHasError: false,
         addUserIsLoading: true,
-        addUserHasError: false
+        addUserHasError: false,
+        deleteUserIsLoading: [],
+        deleteUserHasError: [],
+        deleteUserErrorMsg: {}
       };
-      const payload: User = { id: 2, name: "Test2" };
+      const payload: User = { id: "2", name: "Test2" };
 
       ADD_SUCCESS(state, payload);
 
       expect(state).toEqual({
         users: [
-          { id: 1, name: "Test1" },
-          { id: 2, name: "Test2" }
+          { id: "1", name: "Test1" },
+          { id: "2", name: "Test2" }
         ],
         fetchUsersIsLoading: false,
         fetchUsersHasError: false,
         addUserIsLoading: false,
-        addUserHasError: false
+        addUserHasError: false,
+        deleteUserIsLoading: [],
+        deleteUserHasError: [],
+        deleteUserErrorMsg: {}
       });
     });
     it("should call ADD_ERROR and change to addUserIsLoading=false and addUserHasError=true and error message, given addUserIsLoading=true and addUserHasError=false.", () => {
@@ -171,7 +222,10 @@ describe("Store", () => {
         fetchUsersIsLoading: false,
         fetchUsersHasError: false,
         addUserIsLoading: true,
-        addUserHasError: false
+        addUserHasError: false,
+        deleteUserIsLoading: [],
+        deleteUserHasError: [],
+        deleteUserErrorMsg: {}
       };
       const payload = "error";
 
@@ -183,7 +237,116 @@ describe("Store", () => {
         fetchUsersIsLoading: false,
         fetchUsersHasError: false,
         addUserIsLoading: false,
-        addUserHasError: true
+        addUserHasError: true,
+        deleteUserIsLoading: [],
+        deleteUserHasError: [],
+        deleteUserErrorMsg: {}
+      });
+    });
+
+    it("should call DELETE_INIT and add id to deleteUserIsLoading.", () => {
+      const state: State = {
+        users: [],
+        fetchUsersIsLoading: false,
+        fetchUsersHasError: false,
+        addUserIsLoading: false,
+        addUserHasError: false,
+        deleteUserIsLoading: [],
+        deleteUserHasError: [],
+        deleteUserErrorMsg: {}
+      };
+
+      DELETE_INIT(state, "1");
+
+      expect(state).toEqual({
+        users: [],
+        fetchUsersIsLoading: false,
+        fetchUsersHasError: false,
+        addUserIsLoading: false,
+        addUserHasError: false,
+        deleteUserIsLoading: ["1"],
+        deleteUserHasError: [],
+        deleteUserErrorMsg: {}
+      });
+    });
+
+    it("should call DELETE_INIT and add id to deleteUserIsLoading if id is in deleteUserHasError.", () => {
+      const state: State = {
+        users: [],
+        fetchUsersIsLoading: false,
+        fetchUsersHasError: false,
+        addUserIsLoading: false,
+        addUserHasError: false,
+        deleteUserIsLoading: [],
+        deleteUserHasError: ["1"],
+        deleteUserErrorMsg: { "1": "xyz" }
+      };
+
+      DELETE_INIT(state, "1");
+
+      expect(state).toEqual({
+        users: [],
+        fetchUsersIsLoading: false,
+        fetchUsersHasError: false,
+        addUserIsLoading: false,
+        addUserHasError: false,
+        deleteUserIsLoading: ["1"],
+        deleteUserHasError: [],
+        deleteUserErrorMsg: {}
+      });
+    });
+
+    it("should call DELETE_SUCCESS remove id from deleteUserIsLoading and update user list.", () => {
+      const state: State = {
+        users: [
+          { id: "1", name: "Test1" },
+          { id: "2", name: "Test2" }
+        ],
+        fetchUsersIsLoading: false,
+        fetchUsersHasError: false,
+        addUserIsLoading: false,
+        addUserHasError: false,
+        deleteUserIsLoading: ["1"],
+        deleteUserHasError: [],
+        deleteUserErrorMsg: {}
+      };
+
+      DELETE_SUCCESS(state, "1");
+
+      expect(state).toEqual({
+        users: [{ id: "2", name: "Test2" }],
+        fetchUsersIsLoading: false,
+        fetchUsersHasError: false,
+        addUserIsLoading: false,
+        addUserHasError: false,
+        deleteUserIsLoading: [],
+        deleteUserHasError: [],
+        deleteUserErrorMsg: {}
+      });
+    });
+    it("should call DELETE_ERROR and add id to deleteUserHasError and add error message.", () => {
+      const state: State = {
+        users: [],
+        fetchUsersIsLoading: false,
+        fetchUsersHasError: false,
+        addUserIsLoading: false,
+        addUserHasError: false,
+        deleteUserIsLoading: ["1"],
+        deleteUserHasError: [],
+        deleteUserErrorMsg: {}
+      };
+
+      DELETE_ERROR(state, { id: "1", error: "error" });
+
+      expect(state).toEqual({
+        users: [],
+        fetchUsersIsLoading: false,
+        fetchUsersHasError: false,
+        addUserIsLoading: false,
+        addUserHasError: false,
+        deleteUserIsLoading: [],
+        deleteUserHasError: ["1"],
+        deleteUserErrorMsg: { "1": "error" }
       });
     });
   });
@@ -195,7 +358,10 @@ describe("Store", () => {
         fetchUsersIsLoading: false,
         fetchUsersHasError: false,
         addUserIsLoading: false,
-        addUserHasError: false
+        addUserHasError: false,
+        deleteUserIsLoading: [],
+        deleteUserHasError: [],
+        deleteUserErrorMsg: {}
       };
       const context = {
         commit: jest.fn(),
@@ -223,7 +389,10 @@ describe("Store", () => {
         fetchUsersIsLoading: false,
         fetchUsersHasError: false,
         addUserIsLoading: false,
-        addUserHasError: false
+        addUserHasError: false,
+        deleteUserIsLoading: [],
+        deleteUserHasError: [],
+        deleteUserErrorMsg: {}
       };
       const context = {
         commit: jest.fn(),
@@ -252,7 +421,10 @@ describe("Store", () => {
         fetchUsersIsLoading: false,
         fetchUsersHasError: false,
         addUserIsLoading: false,
-        addUserHasError: false
+        addUserHasError: false,
+        deleteUserIsLoading: [],
+        deleteUserHasError: [],
+        deleteUserErrorMsg: {}
       };
       const context = {
         commit: jest.fn(),
@@ -282,7 +454,10 @@ describe("Store", () => {
         fetchUsersIsLoading: false,
         fetchUsersHasError: false,
         addUserIsLoading: false,
-        addUserHasError: false
+        addUserHasError: false,
+        deleteUserIsLoading: [],
+        deleteUserHasError: [],
+        deleteUserErrorMsg: {}
       };
       const context = {
         commit: jest.fn(),
@@ -306,6 +481,107 @@ describe("Store", () => {
       expect((http.post as jest.Mock).mock.calls[0][1]).toEqual({
         name: "TestUser"
       });
+    });
+
+    it("should commit 'DELETE_INIT', call the api and commit 'DELETE_SUCCESS'", async () => {
+      const state: State = {
+        users: [],
+        fetchUsersIsLoading: false,
+        fetchUsersHasError: false,
+        addUserIsLoading: false,
+        addUserHasError: false,
+        deleteUserIsLoading: [],
+        deleteUserHasError: [],
+        deleteUserErrorMsg: {}
+      };
+      const context = {
+        commit: jest.fn(),
+        dispatch: jest.fn(),
+        state,
+        getters: {},
+        rootState: state,
+        rootGetters: {}
+      } as ActionContext<State, State>;
+      (http.delete as jest.Mock).mockReturnValue({
+        status: 200,
+        data: { id: "1" }
+      });
+
+      await deleteUser(context, "1");
+
+      expect(context.commit).toHaveBeenCalledTimes(2);
+      expect(context.commit).toHaveBeenNthCalledWith(1, "DELETE_INIT", "1");
+      expect(context.commit).toHaveBeenNthCalledWith(2, "DELETE_SUCCESS", "1");
+      expect((http.delete as jest.Mock).mock.calls[0][0]).toEqual("/user/1");
+    });
+
+    it("should commit 'DELETE_INIT', call the api and commit 'DELETE_ERROR' because of an API error", async () => {
+      const state: State = {
+        users: [],
+        fetchUsersIsLoading: false,
+        fetchUsersHasError: false,
+        addUserIsLoading: false,
+        addUserHasError: false,
+        deleteUserIsLoading: [],
+        deleteUserHasError: [],
+        deleteUserErrorMsg: {}
+      };
+      const context = {
+        commit: jest.fn(),
+        dispatch: jest.fn(),
+        state,
+        getters: {},
+        rootState: state,
+        rootGetters: {}
+      } as ActionContext<State, State>;
+      (http.delete as jest.Mock).mockRejectedValue(new Error());
+
+      await deleteUser(context, "1");
+
+      expect(context.commit).toHaveBeenCalledTimes(2);
+      expect(context.commit).toHaveBeenNthCalledWith(1, "DELETE_INIT", "1");
+      expect(context.commit).toHaveBeenNthCalledWith(2, "DELETE_ERROR", {
+        id: "1",
+        error: expect.any(Error)
+      });
+      expect((http.delete as jest.Mock).mock.calls[0][0]).toEqual("/user/1");
+    });
+
+    it("should commit 'DELETE_INIT', call the api and commit 'DELETE_ERROR' because of a wrong response code", async () => {
+      const state: State = {
+        users: [],
+        fetchUsersIsLoading: false,
+        fetchUsersHasError: false,
+        addUserIsLoading: false,
+        addUserHasError: false,
+        deleteUserIsLoading: [],
+        deleteUserHasError: [],
+        deleteUserErrorMsg: {}
+      };
+      const context = {
+        commit: jest.fn(),
+        dispatch: jest.fn(),
+        state,
+        getters: {},
+        rootState: state,
+        rootGetters: {}
+      } as ActionContext<State, State>;
+      (http.delete as jest.Mock).mockReturnValue({ status: 400 });
+
+      await deleteUser(context, "1");
+
+      expect(context.commit).toHaveBeenCalledTimes(2);
+      expect(context.commit).toHaveBeenNthCalledWith(1, "DELETE_INIT", "1");
+      expect(context.commit).toHaveBeenNthCalledWith(
+        2,
+        "DELETE_ERROR",
+
+        {
+          id: "1",
+          error: expect.any(Error)
+        }
+      );
+      expect((http.delete as jest.Mock).mock.calls[0][0]).toEqual("/user/1");
     });
   });
 });

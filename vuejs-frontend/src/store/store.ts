@@ -14,6 +14,9 @@ export interface State {
   addUserIsLoading: boolean;
   addUserHasError: boolean;
   addUserErrorMsg?: string;
+  deleteUserIsLoading: string[];
+  deleteUserHasError: string[];
+  deleteUserErrorMsg: { [id: string]: string };
 }
 
 export const mutations: MutationTree<State> = {
@@ -44,6 +47,37 @@ export const mutations: MutationTree<State> = {
     state.addUserIsLoading = false;
     state.addUserHasError = true;
     state.addUserErrorMsg = payload;
+  },
+  DELETE_INIT(state: State, payload: string): void {
+    state.deleteUserIsLoading = Array.from(
+      new Set([...state.deleteUserIsLoading, payload])
+    );
+    state.deleteUserHasError = state.deleteUserHasError.filter(
+      id => id !== payload
+    );
+    state.deleteUserErrorMsg = Object.fromEntries(
+      Object.entries(state.deleteUserErrorMsg).filter(
+        ([key, value]) => key !== payload
+      )
+    );
+  },
+  DELETE_SUCCESS(state: State, payload: string): void {
+    state.deleteUserIsLoading = state.deleteUserIsLoading.filter(
+      id => id !== payload
+    );
+    state.users = state.users.filter(user => user.id !== payload);
+  },
+  DELETE_ERROR(state: State, payload: { id: string; error: string }): void {
+    state.deleteUserHasError = Array.from(
+      new Set([...state.deleteUserHasError, payload.id])
+    );
+    state.deleteUserErrorMsg = {
+      ...state.deleteUserErrorMsg,
+      [payload.id]: payload.error
+    };
+    state.deleteUserIsLoading = state.deleteUserIsLoading.filter(
+      id => id !== payload.id
+    );
   }
 };
 
@@ -72,14 +106,33 @@ export const addUser = async (
   }
 };
 
+export const deleteUser = async (
+  { commit }: ActionContext<State, State>,
+  id: string
+): Promise<void> => {
+  commit("DELETE_INIT", id);
+  try {
+    const res = await http.delete(`/user/${id}`);
+    if (res.status !== 200) {
+      throw new Error("Server response not accepted.");
+    }
+    commit("DELETE_SUCCESS", res.data.id);
+  } catch (error) {
+    commit("DELETE_ERROR", { id, error });
+  }
+};
+
 export default new Vuex.Store<State>({
   state: {
     users: [],
     fetchUsersIsLoading: true,
     fetchUsersHasError: false,
     addUserIsLoading: false,
-    addUserHasError: false
+    addUserHasError: false,
+    deleteUserIsLoading: [],
+    deleteUserHasError: [],
+    deleteUserErrorMsg: {}
   },
   mutations: mutations,
-  actions: { fetchUsers, addUser }
+  actions: { fetchUsers, addUser, deleteUser }
 });

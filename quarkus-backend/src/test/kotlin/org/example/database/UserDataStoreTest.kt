@@ -7,6 +7,7 @@ import io.mockk.verify
 import org.assertj.core.api.Assertions.assertThat
 import org.example.business.bo.UserBo
 import org.example.business.exceptions.PersistenceFailedException
+import org.example.business.exceptions.UserNotFoundException
 import org.example.business.mapper.UserMapper
 import org.example.database.entity.UserEntity
 import org.example.utils.annotations.UnitTest
@@ -88,6 +89,37 @@ class UserDataStoreTest {
 
             verify { userRepository.persist(sampleUserEntity) }
             verify { userMapper.mapUserBoToUserEntity(sampleUserBo) }
+        }
+    }
+
+    @Nested
+    inner class DeleteUser {
+        @Test
+        fun `delete a user`() {
+            every { userRepository.findById("1") } returns sampleUserEntity
+            every { userRepository.delete(sampleUserEntity) } returns Unit
+            every { userMapper.mapUserEntityToUserBo(sampleUserEntity) } returns sampleUserBo
+
+            val result = cut.deleteUser("1")
+
+            assertThat(result).isEqualTo(sampleUserBo)
+
+            verify { userRepository.findById("1") }
+            verify { userRepository.delete(sampleUserEntity) }
+            verify { userMapper.mapUserEntityToUserBo(sampleUserEntity) }
+        }
+
+        @Test
+        fun `delete a user failed because it not exists`() {
+            every { userRepository.findById("1") } throws UserNotFoundException("1")
+
+            assertThrows(UserNotFoundException::class.java) {
+                cut.deleteUser("1")
+            }
+
+            verify { userRepository.findById("1") }
+            verify(exactly = 0) { userRepository.delete("1") }
+            verify(exactly = 0) { userMapper.mapUserEntityToUserBo(any()) }
         }
     }
 }

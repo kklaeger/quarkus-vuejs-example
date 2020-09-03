@@ -26,7 +26,7 @@ describe(UserList.name + " component", () => {
   });
 
   it("should render the user list for one user and match snapshot.", () => {
-    const users: User[] = [{ id: 1, name: "user1" }];
+    const users: User[] = [{ id: "1", name: "user1" }];
 
     const wrapper = shallowMount(UserList, {
       localVue,
@@ -39,14 +39,14 @@ describe(UserList.name + " component", () => {
         .findAllComponents(UserListElement)
         .at(0)
         .props().user
-    ).toEqual({ id: 1, name: "user1" });
+    ).toEqual({ id: "1", name: "user1" });
     expect(wrapper).toMatchSnapshot();
   });
 
   it("should render the user list for two users and match snapshot.", () => {
     const users: User[] = [
-      { id: 1, name: "user1" },
-      { id: 2, name: "user2" }
+      { id: "1", name: "user1" },
+      { id: "2", name: "user2" }
     ];
 
     const wrapper = shallowMount(UserList, {
@@ -60,13 +60,13 @@ describe(UserList.name + " component", () => {
         .findAllComponents(UserListElement)
         .at(0)
         .props().user
-    ).toEqual({ id: 1, name: "user1" });
+    ).toEqual({ id: "1", name: "user1" });
     expect(
       wrapper
         .findAllComponents(UserListElement)
         .at(1)
         .props().user
-    ).toEqual({ id: 2, name: "user2" });
+    ).toEqual({ id: "2", name: "user2" });
     expect(wrapper).toMatchSnapshot();
   });
 });

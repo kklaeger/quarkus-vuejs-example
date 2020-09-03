@@ -20,4 +20,8 @@ class UserService(private val userDataStore: UserDataStore, private val userMapp
         val createdUser = userDataStore.persistUser(userBoWithId)
         return userMapper.mapUserBoToUserResponseDto(createdUser)
     }
+
+    fun deleteUser(id: String): UserResponseDto {
+        return userMapper.mapUserBoToUserResponseDto(userDataStore.deleteUser(id))
+    }
 }

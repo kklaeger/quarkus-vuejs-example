@@ -97,4 +97,20 @@ class UserControllerIntTest {
 
         verify { userService.saveUser(sampleUserBo) }
     }
+
+    @Test
+    fun `delete a user`() {
+        every { userService.deleteUser("1") } returns sampleUserResponseDto
+        every { userMapper.mapUserRequestDtoToUserBo(sampleUserRequestDto) } returns sampleUserBo
+
+        given().contentType(ContentType.JSON)
+            .delete("/user/1")
+            .then()
+            .statusCode(200)
+            .contentType(MediaType.APPLICATION_JSON)
+            .body("id", `is`("1"),
+                "name", `is`("Test"))
+
+        verify { userService.deleteUser("1") }
+    }
 }

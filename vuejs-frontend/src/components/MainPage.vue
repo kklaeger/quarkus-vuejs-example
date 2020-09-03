@@ -18,6 +18,7 @@ import { Component, Vue } from "vue-property-decorator";
 import UserList from "@/components/UserList.vue";
 import LoadingIcon from "@/components/LoadingIcon.vue";
 import AddUser from "@/components/AddUser.vue";
+import { User } from "@/models/User";
 
 @Component({
   components: { UserList, LoadingIcon, AddUser }
@@ -28,19 +29,19 @@ export default class MainPage extends Vue {
   }
 
   get users() {
-    return this.$store.state.users;
+    return this.$store.state.users as User[];
   }
 
   get isLoading() {
-    return this.$store.state.fetchUsersIsLoading;
+    return this.$store.state.fetchUsersIsLoading as boolean;
   }
 
   get hasError() {
-    return this.$store.state.fetchUsersHasError;
+    return this.$store.state.fetchUsersHasError as boolean;
   }
 
   get errorMsg() {
-    return this.$store.state.fetchUsersErrorMsg;
+    return this.$store.state.fetchUsersErrorMsg as string;
   }
 }
 </script>

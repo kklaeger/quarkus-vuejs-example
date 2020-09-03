@@ -47,6 +47,8 @@ describe(MainPage.name + " component", () => {
       fetchUsersHasError: true,
       addUserIsLoading: false,
       addUserHasError: false,
+      deleteUserIsLoading: false,
+      deleteUserHasError: false,
       fetchUsersErrorMsg: "test"
     };
     const actions = {
@@ -74,7 +76,9 @@ describe(MainPage.name + " component", () => {
       fetchUsersIsLoading: false,
       fetchUsersHasError: false,
       addUserIsLoading: false,
-      addUserHasError: false
+      addUserHasError: false,
+      deleteUserIsLoading: false,
+      deleteUserHasError: false
     };
     const actions = {
       fetchUsers: jest.fn()

@@ -1,15 +1,74 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
+exports[`UserListElement component should click delete button and call respective dispatch. 1`] = `
+<div>
+  <div class="columns is-mobile">
+    <div class="column is-3-mobile is-2-tablet is-1-desktop is-2-widescreen"><span class="icon is-medium"><i class="fas fa-user fa-lg"></i></span></div>
+    <div class="column name-column">user1</div>
+    <div class="column is-3-mobile is-2-tablet is-1-desktop is-2-widescreen"><button type="button" class="button is-text is-rounded">
+        <!----><span><span class="icon is-medium"><i class="fas fa-trash fa-lg"></i></span></span>
+        <!---->
+      </button></div>
+    <!---->
+  </div>
+  <!---->
+</div>
+`;
+
+exports[`UserListElement component should display error icon if id is in deleteUserHasError. 1`] = `
+<div>
+  <div class="columns is-mobile">
+    <div class="column is-3-mobile is-2-tablet is-1-desktop is-2-widescreen">
+      <b-icon-stub pack="fas" icon="user" size="is-medium"></b-icon-stub>
+    </div>
+    <div class="column name-column">user1</div>
+    <div class="column is-3-mobile is-2-tablet is-1-desktop is-2-widescreen">
+      <b-button-stub type="is-text" rounded="true" nativetype="button" tag="button">
+        <b-icon-stub pack="fas" icon="trash" size="is-medium"></b-icon-stub>
+      </b-button-stub>
+    </div>
+    <!---->
+  </div>
+  <div class="error">
+    Unable to delete user: xyz
+  </div>
+</div>
+`;
+
+exports[`UserListElement component should display loading icon if id is in deleteUserIsLoading. 1`] = `
+<div>
+  <div class="columns is-mobile">
+    <div class="column is-3-mobile is-2-tablet is-1-desktop is-2-widescreen">
+      <b-icon-stub pack="fas" icon="user" size="is-medium"></b-icon-stub>
+    </div>
+    <div class="column name-column">user1</div>
+    <div class="column is-3-mobile is-2-tablet is-1-desktop is-2-widescreen">
+      <b-button-stub type="is-text" rounded="true" nativetype="button" tag="button">
+        <b-icon-stub pack="fas" icon="trash" size="is-medium"></b-icon-stub>
+      </b-button-stub>
+    </div>
+    <div class="loading">
+      <loadingicon-stub></loadingicon-stub>
+    </div>
+  </div>
+  <!---->
+</div>
+`;
+
 exports[`UserListElement component should render successfully. 1`] = `
-<div class="columns is-mobile">
-  <div class="column is-3-mobile is-2-tablet is-1-desktop is-2-widescreen">
-    <b-icon-stub pack="fas" icon="user" size="is-medium"></b-icon-stub>
+<div>
+  <div class="columns is-mobile">
+    <div class="column is-3-mobile is-2-tablet is-1-desktop is-2-widescreen">
+      <b-icon-stub pack="fas" icon="user" size="is-medium"></b-icon-stub>
+    </div>
+    <div class="column name-column">Test</div>
+    <div class="column is-3-mobile is-2-tablet is-1-desktop is-2-widescreen">
+      <b-button-stub type="is-text" rounded="true" nativetype="button" tag="button">
+        <b-icon-stub pack="fas" icon="trash" size="is-medium"></b-icon-stub>
+      </b-button-stub>
+    </div>
+    <!---->
   </div>
-  <div class="column name-column">Test</div>
-  <div class="column is-3-mobile is-2-tablet is-1-desktop is-2-widescreen">
-    <b-button-stub type="is-text" rounded="true" nativetype="button" tag="button">
-      <b-icon-stub pack="fas" icon="trash" size="is-medium"></b-icon-stub>
-    </b-button-stub>
-  </div>
+  <!---->
 </div>
 `;
